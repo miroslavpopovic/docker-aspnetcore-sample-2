@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  timetracker:
+    image: ${DOCKER_REGISTRY-}timetracker
+    build:
+      context: .
+      dockerfile: src/TimeTracker/Dockerfile
+  timetracker-client:
+    image: ${DOCKER_REGISTRY-}timetracker-client
+    build:
+      context: .
+      dockerfile: src/TimeTracker.Client/Dockerfile
