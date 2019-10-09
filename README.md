@@ -47,6 +47,10 @@ The application is now accessible from the following URLs:
 
 ## Running individual services
 
+In most cases, you should run using docker compose, but if you want to run individual services, here's how you can do it.
+
+### TimeTracker API
+
 To run the TimeTracker API project with Docker, first create an image from the root folder:
 
     docker build -t timetracker-api-1 . -f src/TimeTracker/Dockerfile
@@ -60,6 +64,16 @@ Or run with `cmd`
     docker run -p 5008:443 -e ASPNETCORE_ENVIRONMENT=Development -e ASPNETCORE_URLS="https://+" -v %APPDATA%/Microsoft/UserSecrets/:/root/.microsoft/usersecrets:ro -v %APPDATA%/ASP.NET/Https:/root/.aspnet/https/ timetracker-api-1
 
 The command above will correctly map the host machine certificate folder and user secrets folder to locations in Linux based container that Kestrel expects. You should now be able to browse the API (Swagger docs) on this URL: https://localhost:5008/swagger/
+
+### TimeTracker Client
+
+Build the image:
+
+    docker build -t timetracker-client-1 . -f src/TimeTracker.Client/build/Dockerfile
+
+Run the image:
+
+    docker run -p 5009:80 timetracker-client-1
 
 ## Download
 
