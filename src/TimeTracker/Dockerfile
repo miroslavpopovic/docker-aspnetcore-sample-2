@@ -18,5 +18,4 @@ RUN dotnet publish "TimeTracker.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY timetracker.pfx .
 ENTRYPOINT ["dotnet", "TimeTracker.dll"]

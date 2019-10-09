@@ -1,8 +1,6 @@
 using System;
 using FluentValidation.AspNetCore;
-using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -42,10 +40,7 @@ namespace TimeTracker
 
             services.AddOpenApi();
 
-            services.AddHealthChecks()
-                .AddSqlite(Configuration.GetConnectionString("DefaultConnection"));
-
-            services.AddHealthChecksUI();
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,16 +77,10 @@ namespace TimeTracker
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
-            app.UseHealthChecksUI();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/health", new HealthCheckOptions
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
+                endpoints.MapHealthChecks("/live");
             });
         }
     }

@@ -6,8 +6,8 @@ services:
     build:
       context: .
       dockerfile: src/TimeTracker/Dockerfile
-  timetracker-client:
-    image: ${DOCKER_REGISTRY-}timetracker-client
-    build:
-      context: .
-      dockerfile: src/TimeTracker.Client/Dockerfile
+#  timetracker-client:
+#    image: ${DOCKER_REGISTRY-}timetracker-client
+#    build:
+#      context: .
+#      dockerfile: src/TimeTracker.Client/Dockerfile
