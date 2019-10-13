@@ -2,7 +2,17 @@
 
 A sample code for the presentation "Docker and ASP.NET Core 3.0". There's also an older version of the presentation and different sample, for ASP.NET Core 2.1. You can find it [here](https://github.com/miroslavpopovic/aspnetcore-workshop).
 
-Sample application is taken from my [ASP.NET Core workshop](https://github.com/miroslavpopovic/aspnetcore-workshop). Some docker and config files taken from (inspired by) [Quick intro to Docker and Docker Compose: Angular, ASP.NET Core and Postgres app](
+The intention of this sample is to demonstrate using ASP.NET Core application inside Docker container and consuming other services which are also dockerized. This is done using [`docker-compose`](docker-compose.yaml). The following containers are created:
+
+1. TimeTracker API - ASP.NET Core application, hosted on Linux container via [Kestrel](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-3.0)
+2. TimeTracker Client - [Blazor WebAssembly](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) application, hosted on Linux container via [nginx](https://www.nginx.com/)
+3. TimeTracker DB - [PostgreSQL](https://www.postgresql.org/) database
+4. TimeTracker Proxy - Reverse proxy service with [HAProxy](http://www.haproxy.org/)
+5. [Elasticsearch](https://www.elastic.co/products/elasticsearch) and [Kibana](https://www.elastic.co/products/kibana) - [ELK stack](https://www.elastic.co/products/elastic-stack) for logging messages from API container
+
+An `overlay` network is used to connect all those services. Few Docker volumes are also used to persist the data on the host.
+
+The application itself is taken from my [ASP.NET Core workshop](https://github.com/miroslavpopovic/aspnetcore-workshop). Some docker and config files taken from (inspired by) [Quick intro to Docker and Docker Compose: Angular, ASP.NET Core and Postgres app](
 https://blog.codingmilitia.com/2018/01/31/quick-intro-to-docker-and-docker-compose-angular-aspnetcore-postgres-app) post by [@joaofbantunes](https://github.com/joaofbantunes).
 
 The instructions below are assuming you are using Windows operating system as a host.
