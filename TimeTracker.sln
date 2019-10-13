@@ -16,6 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{93B43D7F-DC2
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TimeTracker.Proxy", "TimeTracker.Proxy", "{65879A63-395F-44AC-9203-1EB3BD284FD4}"
+	ProjectSection(SolutionItems) = preProject
+		src\TimeTracker.Proxy\Dockerfile = src\TimeTracker.Proxy\Dockerfile
+		src\TimeTracker.Proxy\haproxy.cfg = src\TimeTracker.Proxy\haproxy.cfg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

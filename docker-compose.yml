@@ -2,13 +2,16 @@ version: '3.4'
 
 services:
 
-  timetracker:
-    image: ${DOCKER_REGISTRY-}timetracker
+  reverse-proxy:
     build:
-      context: .
-      dockerfile: src/TimeTracker/Dockerfile
+      context: src/TimeTracker.Proxy
+    ports:
+      - "5110:80"
+      - "5111:5001"
     networks:
       - overlay
+    depends_on:
+      - timetracker-client
 
   timetracker-client:
     image: ${DOCKER_REGISTRY-}timetrackerclient
@@ -19,6 +22,16 @@ services:
       - overlay
     depends_on:
       - timetracker
+
+  timetracker:
+    image: ${DOCKER_REGISTRY-}timetracker
+    build:
+      context: .
+      dockerfile: src/TimeTracker/Dockerfile
+    networks:
+      - overlay
+    depends_on:
+      - timetracker-db
 
   timetracker-db:
     image: postgres:alpine
