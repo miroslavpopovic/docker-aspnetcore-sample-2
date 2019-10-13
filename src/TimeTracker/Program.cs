@@ -2,7 +2,9 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Debugging;
 using Serilog.Events;
+using Serilog.Sinks.Elasticsearch;
 
 namespace TimeTracker
 {
@@ -20,7 +22,14 @@ namespace TimeTracker
                     rollOnFileSizeLimit: true,
                     shared: true,
                     flushToDiskInterval:TimeSpan.FromSeconds(1))
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://elasticsearch:9200/"))
+                {
+                    AutoRegisterTemplate = true,
+                    AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+                    EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog
+                })
                 .CreateLogger();
+            SelfLog.Enable(Console.Error);
 
             try
             {

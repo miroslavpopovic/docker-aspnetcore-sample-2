@@ -28,6 +28,4 @@ services:
       POSTGRES_PASSWORD: timetracker_pass
       POSTGRES_DB: timetracker
     volumes:
-        # Best practice, but apparently doesn't work on Windows
-        # https://github.com/docker/for-win/issues/445
-      - ./pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
