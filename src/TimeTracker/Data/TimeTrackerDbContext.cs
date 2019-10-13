@@ -38,7 +38,7 @@ namespace TimeTracker.Data
                     Id = 1L,
                     UserId = 1L,
                     ProjectId = 1L,
-                    EntryDate = new DateTime(2019, 7, 1),
+                    EntryDate = new DateTime(2019, 10, 1),
                     Hours = 5,
                     HourRate = 25m,
                     Description = "Time entry description 1"
@@ -48,7 +48,7 @@ namespace TimeTracker.Data
                     Id = 2L,
                     UserId = 1L,
                     ProjectId = 2L,
-                    EntryDate = new DateTime(2019, 7, 1),
+                    EntryDate = new DateTime(2019, 10, 1),
                     Hours = 2,
                     HourRate = 25m,
                     Description = "Time entry description 2"
@@ -58,7 +58,7 @@ namespace TimeTracker.Data
                     Id = 3L,
                     UserId = 1L,
                     ProjectId = 3L,
-                    EntryDate = new DateTime(2019, 7, 1),
+                    EntryDate = new DateTime(2019, 10, 1),
                     Hours = 1,
                     HourRate = 25m,
                     Description = "Time entry description 3"
@@ -68,10 +68,30 @@ namespace TimeTracker.Data
                     Id = 4L,
                     UserId = 2L,
                     ProjectId = 3L,
-                    EntryDate = new DateTime(2019, 7, 1),
+                    EntryDate = new DateTime(2019, 10, 1),
                     Hours = 8,
                     HourRate = 30m,
                     Description = "Time entry description 4"
+                },
+                new
+                {
+                    Id = 5L,
+                    UserId = 1L,
+                    ProjectId = 3L,
+                    EntryDate = new DateTime(2019, 12, 1),
+                    Hours = 1,
+                    HourRate = 25m,
+                    Description = "Time entry description 5"
+                },
+                new
+                {
+                    Id = 6L,
+                    UserId = 2L,
+                    ProjectId = 3L,
+                    EntryDate = new DateTime(2019, 12, 1),
+                    Hours = 8,
+                    HourRate = 30m,
+                    Description = "Time entry description 6"
                 });
         }
     }

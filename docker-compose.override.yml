@@ -21,3 +21,13 @@ services:
       - ASPNETCORE_HTTPS_PORT=44398
     ports:
       - "12609:80"
+
+  timetracker-db:
+    environment:
+      POSTGRES_USER: timetracker_user
+      POSTGRES_PASSWORD: timetracker_pass
+      POSTGRES_DB: timetracker
+    volumes:
+        # Best practice, but apparently doesn't work on Windows
+        # https://github.com/docker/for-win/issues/445
+      - ./pgdata:/var/lib/postgresql/data

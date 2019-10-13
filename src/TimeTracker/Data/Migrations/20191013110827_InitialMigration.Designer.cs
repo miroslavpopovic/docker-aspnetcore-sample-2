@@ -4,29 +4,33 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TimeTracker.Data;
 
 namespace TimeTracker.Data.Migrations
 {
     [DbContext(typeof(TimeTrackerDbContext))]
-    [Migration("20190927214721_SeedTimeEntries")]
-    partial class SeedTimeEntries
+    [Migration("20191013110827_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("TimeTracker.Domain.Client", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -49,14 +53,15 @@ namespace TimeTracker.Data.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<long>("ClientId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -89,26 +94,27 @@ namespace TimeTracker.Data.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("EntryDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<decimal>("HourRate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("numeric");
 
                     b.Property<int>("Hours")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<long>("ProjectId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.Property<long>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -123,7 +129,7 @@ namespace TimeTracker.Data.Migrations
                         {
                             Id = 1L,
                             Description = "Time entry description 1",
-                            EntryDate = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EntryDate = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HourRate = 25m,
                             Hours = 5,
                             ProjectId = 1L,
@@ -133,7 +139,7 @@ namespace TimeTracker.Data.Migrations
                         {
                             Id = 2L,
                             Description = "Time entry description 2",
-                            EntryDate = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EntryDate = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HourRate = 25m,
                             Hours = 2,
                             ProjectId = 2L,
@@ -143,7 +149,7 @@ namespace TimeTracker.Data.Migrations
                         {
                             Id = 3L,
                             Description = "Time entry description 3",
-                            EntryDate = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EntryDate = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HourRate = 25m,
                             Hours = 1,
                             ProjectId = 3L,
@@ -153,7 +159,27 @@ namespace TimeTracker.Data.Migrations
                         {
                             Id = 4L,
                             Description = "Time entry description 4",
-                            EntryDate = new DateTime(2019, 7, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EntryDate = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HourRate = 30m,
+                            Hours = 8,
+                            ProjectId = 3L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Description = "Time entry description 5",
+                            EntryDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HourRate = 25m,
+                            Hours = 1,
+                            ProjectId = 3L,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            Description = "Time entry description 6",
+                            EntryDate = new DateTime(2019, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HourRate = 30m,
                             Hours = 8,
                             ProjectId = 3L,
@@ -165,14 +191,15 @@ namespace TimeTracker.Data.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<decimal>("HourRate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("numeric");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

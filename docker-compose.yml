@@ -19,6 +19,11 @@ services:
       - overlay
     depends_on:
       - timetracker
-      
+
+  timetracker-db:
+    image: postgres:alpine
+    networks:
+      - overlay
+
 networks:
   overlay:

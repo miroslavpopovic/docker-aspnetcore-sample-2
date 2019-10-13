@@ -15,7 +15,7 @@ namespace TimeTracker
     public class Startup
     {
         public static Action<IConfiguration, DbContextOptionsBuilder> ConfigureDbContext = (configuration, options) =>
-            options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
 
         public Startup(IConfiguration configuration)
         {
@@ -44,7 +44,7 @@ namespace TimeTracker
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TimeTrackerDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -82,6 +82,8 @@ namespace TimeTracker
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/live");
             });
+
+            app.ApplyMigrations(dbContext);
         }
     }
 }
