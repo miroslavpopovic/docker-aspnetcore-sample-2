@@ -87,4 +87,4 @@ Run the image:
 
 ## Download
 
-- TODO
+- [.NET DeveloperDays Warsaw presentation](dotnet-developerdays-docker-and-aspnet-core.pptx)
