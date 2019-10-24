@@ -2,16 +2,21 @@ version: '3.4'
 
 services:
 
-  reverse-proxy:
+  timetracker-db:
+    image: postgres:alpine
+    networks:
+      - overlay
+
+  timetracker:
+    image: ${DOCKER_REGISTRY-}timetracker
     build:
-      context: src/TimeTracker.Proxy
-    ports:
-      - "5110:80"
-      - "5111:5001"
+      context: .
+      dockerfile: src/TimeTracker/Dockerfile
     networks:
       - overlay
     depends_on:
-      - timetracker-client
+      - timetracker-db
+      - elasticsearch
 
   timetracker-client:
     image: ${DOCKER_REGISTRY-}timetrackerclient
@@ -23,21 +28,17 @@ services:
     depends_on:
       - timetracker
 
-  timetracker:
-    image: ${DOCKER_REGISTRY-}timetracker
+  reverse-proxy:
     build:
-      context: .
-      dockerfile: src/TimeTracker/Dockerfile
+      context: src/TimeTracker.Proxy
+    ports:
+      - "5110:80"
+      - "5111:5001"
     networks:
       - overlay
     depends_on:
-      - timetracker-db
+      - timetracker-client
 
-  timetracker-db:
-    image: postgres:alpine
-    networks:
-      - overlay
-    
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
     environment:

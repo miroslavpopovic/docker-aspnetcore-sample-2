@@ -2,6 +2,14 @@ version: '3.4'
 
 services:
 
+  timetracker-db:
+    environment:
+      POSTGRES_USER: timetracker_user
+      POSTGRES_PASSWORD: timetracker_pass
+      POSTGRES_DB: timetracker
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   timetracker:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -21,11 +29,3 @@ services:
       - ASPNETCORE_HTTPS_PORT=44398
     ports:
       - "12609:80"
-
-  timetracker-db:
-    environment:
-      POSTGRES_USER: timetracker_user
-      POSTGRES_PASSWORD: timetracker_pass
-      POSTGRES_DB: timetracker
-    volumes:
-      - pgdata:/var/lib/postgresql/data
