@@ -40,7 +40,7 @@ services:
       - timetracker-client
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
     environment:
       - discovery.type=single-node
     ports:
@@ -52,7 +52,7 @@ services:
       - overlay
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.4.0
+    image: docker.elastic.co/kibana/kibana:7.5.0
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
     ports:

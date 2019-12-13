@@ -1,7 +1,7 @@
 ﻿# Docker configuration inspired by https://chrissainty.com/containerising-blazor-applications-with-docker-containerising-a-blazor-webassembly-app/
 
 # STAGE 1: Build
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["src/TimeTracker.Client/TimeTracker.Client.csproj", "TimeTracker.Client/"]
 RUN dotnet restore "TimeTracker.Client/TimeTracker.Client.csproj"
