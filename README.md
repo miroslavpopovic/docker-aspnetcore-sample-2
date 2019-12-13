@@ -88,3 +88,4 @@ Run the image:
 ## Download
 
 - [.NET DeveloperDays Warsaw presentation](dotnet-developerdays-docker-and-aspnet-core.pptx)
+- [SQLSaturday Ljubljana presentation](sqlsat-ljubljana-docker-and-aspnet-core.pptx)
